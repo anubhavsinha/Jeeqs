@@ -104,6 +104,7 @@
 
         $(document).ready(function () {
             if ($.cookie('banner')!='shown'){
+                $('body').css('padding-top','40px');
                 $('#banner').show();
                 $('#tour_without_banner').hide();
             }
@@ -298,11 +299,6 @@
 {% endblock column1 %}
 
 {% block column2 %}
-<style>
-    body {
-        padding-top: 40px; /* 40px instead of 60px to adjust for the banner */
-    }
-</style>
 {% if not jeeqser.took_tour %}
 <div id="tour_without_banner" class="pull-right content_centered" >
     <button class="btn btn-info" id="take_tour">See how it works</button>
