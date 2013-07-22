@@ -103,6 +103,13 @@
 
 
         $(document).ready(function () {
+            if ($.cookie('banner')!='shown'){
+                $('#banner').show();
+                $('#tour_without_banner').hide();
+            }
+            else{
+                $('#tour_without_banner').show();
+            }
             $('#home_tabs a:first').tab('show');
 
             $(':button').button();
@@ -291,9 +298,14 @@
 {% endblock column1 %}
 
 {% block column2 %}
+<style>
+    body {
+        padding-top: 40px; /* 40px instead of 60px to adjust for the banner */
+    }
+</style>
 {% if not jeeqser.took_tour %}
-<div id="tour" class="pull-right content_centered" >
-    <button class="btn btn-info" id="take_tour">Take a Tour</button>
+<div id="tour_without_banner" class="pull-right content_centered" >
+    <button class="btn btn-info" id="take_tour">See how it works</button>
 </div>
 {% endif %}
 <div class="share_social">

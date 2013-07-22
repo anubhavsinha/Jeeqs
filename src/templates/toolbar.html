@@ -63,3 +63,36 @@
         </div>
     </div>
 </div>
+<header id="banner" class="jumbotron subhead" style="padding-top:20px;background:#FBB917;min-height:122px;margin-bottom:20px;">
+    <a href="javascript:hide_banner();" class="span1 pull-right" style="color:black;"><h2><i class="icon-remove-sign"></i></h2></a>
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <h1>Banner Text</h1>
+                <p class="lead">long banner text longer banner text longer longer.</p>
+                <p class="lead">second line second line banner text longer banner text longer longer.</p>
+            </div>
+            <div class="span4">
+                <div id="tour-container">
+                    <div class="banner-tour">
+                        {% if not jeeqser.took_tour %}
+                        <div id="tour" class="content_centered" style="margin-top:40px;">
+                            <button class="btn btn-large btn-success" id="take_tour">See how it works</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+    $('#banner').hide();
+    var hide_banner = function(){
+        $('#banner').slideUp();
+        $.cookie("banner", "shown", {expires: new Date(2019, 10, 29, 11, 00, 00), secure: false});
+        $('#tour_without_banner').show();
+        $('body').css('padding-top','60px');
+
+    };
+</script>
