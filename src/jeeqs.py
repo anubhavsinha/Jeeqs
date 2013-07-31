@@ -26,7 +26,7 @@ from user_handler import UserHandler
 from google.appengine.api import users
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext import ndb
-
+from google.appengine.api import mail
 import lib.markdown as markdown
 
 import core
@@ -303,6 +303,18 @@ class AttemptsHandler(jeeqs_request_handler.JeeqsRequestHandler):
         self.response.write(rendered)
 
 
+class FeedbackHandler(jeeqs_request_handler.JeeqsRequestHandler):
+    def post(self):
+        email = self.request.get('user_email')
+        feedback = self.request.get('feedback')
+        mail.send_mail(sender="noreply@jeeqsy.appspotmail.com",
+                       to='ali.akhavan@jeeqs.com',
+                       reply_to=email,
+                       subject="Received a feedback!",
+                       body="no html version",
+                       html=feedback)
+        self.response.out.write('Thanks for your feedback. We will get back to you soon.')
+
 def main():
     application = webapp2.WSGIApplication(
         [('/', FrontPageHandler),
@@ -312,7 +324,8 @@ def main():
             ('/review/', review_handler.ReviewHandler),
             ('/rpc', rpc_handler.RPCHandler),
             ('/user/', UserHandler),
-            ('/about/', AboutHandler)])
+            ('/about/', AboutHandler),
+            ('/feedback/', FeedbackHandler)])
     run_wsgi_app(application)
 
 

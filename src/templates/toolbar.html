@@ -58,8 +58,72 @@
                     <li><a href="{{ login_url }}">Log-in</a></li>
                 {% endif %}
                 <li class="divider-vertical"></li>
+                <li><a href="javascript:show_feedback()">Feedback</a></li>
                 <li><a href="/about/">About</a></li>
             </ul>
         </div>
     </div>
 </div>
+<style>#feedback{background:#555;margin-bottom:20px;height: 230px;display:none;}</style>
+<header class="jumbotron subhead" id="feedback">
+    <div class="container">
+    <form class="row">
+        <div class="span8">
+            <label style="margin-top:20px;"><h4 style="color:white;">Your Feedback:</h4>
+                <input id="feedback_user" type="hidden" value="{{ jeeqser.user }}">
+                <textarea class="span8" id="feedback_text" rows="5" placeholder="Please write your feedback here."></textarea>
+            </label>
+            <a class="btn" href="javascript:submit_feedback();">Submit</a>
+            <span id="feedback_response" class="alert alert-info" style="margin-left:20px; display:none;"></span>
+        </div>
+    </form>
+    </div>
+</header>
+<script>
+    feedback_state = false;
+    var show_feedback=function(){
+        $('#feedback').slideToggle();
+        if (feedback_state==false)
+        {$('body').css('padding-top','40px');
+            feedback_state=true;
+        }
+        else{
+            $('body').css('padding-top','60px');
+            feedback_state=false;
+        }
+
+    };
+    var submit_feedback=function(){
+        var user_email = $('#feedback_user').val();
+        var content = $('#feedback_text').val();
+        if (user_email == ''){
+            $('#feedback_response').html('You need to be logged in to send us a feedback.')
+            $('#feedback_response').show()
+            return;
+        }
+        if (content==''){
+            $('#feedback_response').html("Feedback shouldn't be empty")
+            $('#feedback_response').show()
+            return;
+        }
+        //post the feedback
+        $.ajax({
+            url: "/feedback/",
+            async: true,
+            type: "POST",
+            data: {'user_email': user_email, 'feedback': content},
+            success: function (response) {
+                $('#feedback_response').html(response);
+                $('#feedback_response').show()
+            },
+            error: function() {
+                $('#feedback_response').html('Something went wrong! Please try again.');
+                $('#feedback_response').show()
+            }
+        });
+
+
+
+
+            }
+</script>
