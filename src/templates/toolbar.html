@@ -119,7 +119,12 @@
             data: {'user_email': user_email, 'feedback': content},
             success: function (response) {
                 $('#feedback_response').html(response);
-                $('#feedback_response').show()
+                $('#feedback_response').show();
+                $('#feedback_text').attr('readonly','readonly');
+                $('#feedback_text').css('font-style','italic');
+                $('#feedback_text').css('color','#aaa');
+
+
             },
             error: function() {
                 $('#feedback_response').html('Something went wrong! Please try again.');
