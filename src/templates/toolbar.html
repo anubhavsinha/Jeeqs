@@ -18,7 +18,7 @@
                     <li class="divider-vertical"></li>
                     <ul role="navigation" class="nav">
                         <li>
-                            <div class="dropdown">
+                            <div class="dropdown" id="dropdown_selector" data-toggle="tooltip" data-placement="bottom" title="Pick a course !">
                                 <a data-toggle="dropdown" class="btn btn-success dropdown-toggle" role="button" href="#" id="course_dropdown">
                                     {{ course.code }} - {{ course.name }} - <span class="label label-success">{{ course.university }}</span>
                                     <i class="icon icon-caret-down"></i>
@@ -82,6 +82,9 @@
     </div>
 </header>
 <script>
+    $(document).ready(function(){
+        $("#dropdown_selector").tooltip();
+    });
     feedback_state = false;
     var hide_feedback = function(){
         $('#feedback').slideUp();
@@ -136,6 +139,7 @@
 
 
     }
+
 </script>
 <header id="banner" class="jumbotron subhead"
         style="padding-top:20px;background:#FBB917;min-height:122px;margin-bottom:20px;">

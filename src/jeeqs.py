@@ -310,7 +310,7 @@ class FeedbackHandler(jeeqs_request_handler.JeeqsRequestHandler):
         email = self.request.get('user_email')
         feedback = self.request.get('feedback')
         mail.send_mail(sender="noreply@jeeqsy.appspotmail.com",
-                       to='ali.akhavan@jeeqs.com',
+                       to='email@anubhavsinha.com',
                        reply_to=email,
                        subject="Received a feedback!",
                        body="no html version",
