@@ -129,6 +129,7 @@
 
 
         $(document).ready(function () {
+            $('#course_external_link').tooltip();
             if ($.cookie('banner')!='shown'){
                 //$('body').css('padding-top','40px');
                 $('#banner').show();
@@ -225,7 +226,7 @@
     <a class="noline"
        href="{{ course.url }}"
        target="_blank">
-        <i class="btn icon-large icon-share-alt pull-right"></i>
+        <i id="course_external_link" data-toggle="tooltip" data-placement="bottom" title="Click here for the course material !" class="btn icon-large icon-share-alt pull-right"></i>
     </a>
 </h2>
 <div id="challenge-list" class="row-fluid">
